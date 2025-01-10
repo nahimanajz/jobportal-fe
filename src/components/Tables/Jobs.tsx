@@ -20,7 +20,7 @@ const Jobs: FC<IProps> = ({ jobs }) => {
       toast.success("Application sent!!");
     },
     onError: (err) => {
-      console.log(err);
+     
       toast.error("something went wrong");
     },
   });

@@ -24,9 +24,14 @@ const SignUp: React.FC = () => {
     resolver:yupResolver(UserSchema)
   });
   
-  const onSubmit: SubmitHandler<User> = (data) => {
-    signup(data)
-    toast.info("user signup successfully")
+  const onSubmit: SubmitHandler<User> = async (data) => {
+    try {
+      await signup(data)
+      toast.info("user signup successfully")
+    } catch (error) {
+      toast.error("something went wrong")
+    }  
+    
   };
   return (
     <PublicLayout title="Sign up to Job board">

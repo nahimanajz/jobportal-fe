@@ -16,11 +16,11 @@ const Appliations: FC<IProps> = ({ data }) => {
     mutationFn: update,
     onSuccess: (respo) => {
       queryClient.invalidateQueries({ queryKey: ['applications'] })
-      console.log("response", respo)
+    
       
     },
     onError:(err:any)=>{
-      console.log(err)
+     
       toast.error(err.response.data.message)
     }
   })
@@ -28,11 +28,11 @@ const Appliations: FC<IProps> = ({ data }) => {
     mutationFn: deleteApplication,
     onSuccess: (respo) => {
       queryClient.invalidateQueries({ queryKey: ['applications'] })
-      console.log("response while deleting", respo)
+      
       
     },
     onError:(err:any)=>{
-      console.log(err)
+     
       toast.error(err.response.data.message)
 
     }

@@ -41,7 +41,7 @@ const Page = () => {
   }
 
   const categoryOptions = categories?.map((item) => item.category).splice(0, 10)
-  console.log(jobs)
+
   return (
     <div className="flex flex-col">
       <div className="bg-white px-8 py-3 shadow">

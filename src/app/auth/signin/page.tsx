@@ -27,18 +27,15 @@ const SignIn: React.FC = () => {
   const onSubmit: SubmitHandler<UserLogin> = async (credentials) => {
     try {
      const res= await signIn("credentials", {...credentials, redirect:false})
-     console.log(res)
+     
      if(res?.ok){
       router.push("/")
      }
       
     } catch (error) {
-      console.log("the problem is ====>", error)
-      toast.error("Invalid username or password");
+  
     }
-     //console.log("response", res)
     
-     // router.push("/");
     
   };
 
