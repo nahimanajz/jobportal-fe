@@ -6,9 +6,24 @@ import { FiltersProps } from "@/types/IFilterProps";
 
 const Filters: FC<FiltersProps> = ({ handleChange, setFilters, filters, className='bg-primary' }) => {
   return (
-    <div className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4`}>
+    <div className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4 justify-between w-full`}>
       <div className="mb-4 flex flex-wrap gap-4 lg:flex-nowrap">
+       
         <TextInputWithEvent
+          name="title"
+          label="Title"
+          placeholder="Filter job by title"
+          className={"bg-white"}
+          onChange={handleChange}
+        />
+        <TextInputWithEvent
+          name="description"
+          label="Description"
+          placeholder="Filter job by description"
+          className={"bg-white"}
+          onChange={handleChange}
+        />
+         <TextInputWithEvent
           name="location"
           label="location"
           placeholder="location"

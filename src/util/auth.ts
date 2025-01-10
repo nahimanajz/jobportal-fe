@@ -47,7 +47,7 @@ export const authOptions:NextAuthOptions = {
       
       const jwt = token as any;
       session.accessToken = jwt.accessToken;
-      session.user = jwt.user;
+      session.user = jwt.user;  
       return session;
     },
   },

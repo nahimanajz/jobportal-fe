@@ -22,7 +22,7 @@ export default function JobList() {
   });
   const { data, isLoading, error } = useQuery({
     queryKey: ["jobs", filters],
-    queryFn: getAllFiltered, //getAll,
+    queryFn: getAllFiltered,
   });
 
   const handlePageChange = (direction: string) => {

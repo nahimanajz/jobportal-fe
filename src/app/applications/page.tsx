@@ -29,7 +29,6 @@ import ApplicationFilters from "@/components/applications/Filters";
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
       setFilters({ ...filters, [e.target.name]: e.target.value });
     };
-    console.log(data)
   return (
     <DefaultLayout>
        <ApplicationFilters

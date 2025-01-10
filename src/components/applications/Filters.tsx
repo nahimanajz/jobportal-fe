@@ -12,7 +12,14 @@ const ApplicationFilters: FC<FiltersProps> = ({
     <div
       className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4`}
     >
-      <div className="mb-4 flex flex-wrap gap-4 lg:flex-nowrap">
+      <div className="mb-4 flex flex-wrap gap-4 lg:flex-nowrap justify-betwee w-full">
+      <TextInputWithEvent
+          name="location"
+          label="Job location"
+          placeholder="Filter by Job location"
+          className={"bg-white"}
+          onChange={handleChange}
+        />
         <TextInputWithEvent
           name="status"
           label="status"
