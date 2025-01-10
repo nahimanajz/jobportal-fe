@@ -12,14 +12,14 @@ export const ApplicationSchema = yup.object({
 export type Application = yup.InferType<typeof ApplicationSchema> & {
   id?:string,
   dateApplied?:string,
-  status?: "Pending"|"Reviewed"|"Offered"|string,
+  status?: "Pending"|"Reviewed"|"Accepted"|string,
 
 };
 
 export type ApplicationResponse = {
     user: User,
     job: Job
-    status: "Pending"| "Reviewed"| "Offered" | string,
+    status: "Pending"| "Reviewed"| "Accepted" | string,
     id: string,
     dateApplied: Date | any
 } 

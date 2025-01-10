@@ -12,8 +12,8 @@ export const getAll = async (query?:any):Promise<ApplicationResponse | any> => {
     const { data } = await axiosConfig.post(`${config()}/applications`, application);
     return data;
   };
-  export const update = async (application: Application):Promise<Application> => {
-    const { data } = await axiosConfig.patch(`${config()}/applications/${application.id}`, application);
+  export const update = async ({id, status}: Application):Promise<Application> => {
+    const { data } = await axiosConfig.patch(`${config()}/applications/${id}`, {status});
     return data;
   };
   export const deleteApplication = async (id: string):Promise<Application> => {

@@ -1,22 +1,25 @@
 "use client";
-import React, { useState } from "react";
+
+import { ChangeEvent } from "react";
+
 type IProps = {
   options: string[]
   label: string
-  register: Function;
   value?: any,
-  name:string
+  name:string,
+  onChange?: (e:ChangeEvent<HTMLSelectElement>)=>void
 };
-const SelectGroupOne: React.FC<IProps> = ({ options, label, register,value,name }) => {
+const SelectGroupOne: React.FC<IProps> = ({ options, label,value,name, onChange }) => {
  
   return (
     <div className="mb-4.5">
-      <label className="mb-2.5 block text-black dark:text-white">{label} (optional)</label>
+      <label className="mb-2.5 block text-black dark:text-white">{label} </label>
 
       <div className="relative z-20 bg-transparent dark:bg-form-input">
         <select
+          name={name}
           defaultValue={value}
-         {...register(name)}
+          onChange={onChange}
           className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">
