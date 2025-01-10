@@ -18,3 +18,6 @@ export type JobResponse = {
   currentPage: number;
   totalCount: number;
 };
+export type CategoryResponse = {
+  category: string;
+};

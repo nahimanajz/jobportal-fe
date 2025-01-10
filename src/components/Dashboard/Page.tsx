@@ -1,69 +1,95 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import CardDataStats from "../cards/CardDataStats";
-import * as Icon from "@/components/icons";
-import Jobs from "../Tables/Jobs";
-import Candidates from "../Tables/applications";
-
-
-import { getAll as getCandidates } from "@/app/services/application";
-import { getAll as getJobs } from "@/app/services/jobs";
-import { User } from "@/types/custom/user";
-
-import CardActivity from "../cards/CardActivity";
-import { Job } from "@/types/custom/job";
+import React, { ChangeEvent, use, useEffect, useState } from "react";
+import { Job, JobResponse } from "@/types/custom/job";
 import { Application } from "@/types/custom/application";
-import ActionLink from "../common/ActionLink";
+import Chart from "../Charts/chart";
+import { useQuery } from "@tanstack/react-query";
+import { getApplicationOvertime } from "@/app/services/dashboard";
+import SelectGroupOne from "../FormElements/SelectGroup/SelectGroupOne";
+import { OvertimeResponse } from "@/types/IDashboardResponse";
+import Jobs from "../Tables/Jobs";
+import { getAll, getAllFiltered, getCategories } from "@/app/services/jobs";
 
-type DashboardProps = {
-  jobs: Job[];
-  applications: Application[];
 
-};
-const Page: React.FC = () => {
-  const [data, setData] = useState<DashboardProps>();
-  const [activeTab, setActiveTab] = useState(1);
+const Page = () => {
+  const [interval, setInterval] = useState("day")
+  const [category, setCategory] = useState<string>()
 
-  const getData = async () => {
-   //TODO: fetch all jobs, and all application for admin and regular users
-  };
- 
-  useEffect(() => {
-    getData();
-  }, []);
 
- 
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["applicationsOvertime", interval],
+    queryFn: getApplicationOvertime,
+  });
+
+  // Jobs
+  const { data: jobs, isLoading: loading, error: jobErr } = useQuery({
+    queryKey: ["jobs", category],
+    queryFn: getAll,
+  });
+  // job categorues
+  const { data: categories, isLoading: catLoading, error: catErr } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+
+  const doOnchange = (e: ChangeEvent<HTMLSelectElement>) => {
+
+    setInterval(e.target.value)
+  }
+  const onChangeSelectOption = (e: ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value)
+  }
+
+  const categoryOptions = categories?.map((item) => item.category).splice(0, 10)
+  console.log(jobs)
   return (
-    <>
-      <div className="flex justify-between">
-        <span className="text-[22px] font-semibold leading-[33px] text-[#071C50] dark:text-white">
-          Overview
-        </span>
-        
+    <div className="flex flex-col">
+      <div className="bg-white px-8 py-3 shadow">
+        <div className="flex justify-between bg-white">
+          <span className="text-[22px] font-semibold leading-[33px] text-[#071C50] dark:text-white ">
+            Job applications overtime
+          </span>
+
+        </div>
+
+        <div className="mt-12 flex flex-col justify-start gap-4">
+          <span className=" leading-[33px] text-[#333] dark:text-white">
+            <div className="w-1/2">
+              <SelectGroupOne
+                options={["day", "week", "month", "year"]}
+                label={"Filter Applications by date range"} name={"interval"}
+                onChange={doOnchange}
+              />
+            </div>
+          </span>
+
+        </div>
+        <div className="mt-12 flex flex-col justify-between gap-8">
+
+          <Chart data={data as unknown as OvertimeResponse[]} />
+        </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-6">
-        <CardActivity
-          count={33}
-          title={"Interview Scheduled"}
-          imgUrl={"/images/interview.svg"}
-        />
-        <CardActivity
-          count={2}
-          title={"Interview Feedback Pending"}
-          imgUrl={"/images/feedback.svg"}
-        />
+      <div className="py-3 flex gap-8">
+        <div className="shadow bg-white px-6 py-5">
+       
+          {categories &&
+            <SelectGroupOne
+              options={categoryOptions as string[]}
+              label={"Job Categories"}
+              name={"jobs"}
+              onChange={onChangeSelectOption}
+
+            />}
+          <Jobs jobs={jobs?.jobs as Job[]} />
+
+        </div>
+        <div className="shadow bg-white">
+           
+        </div>
 
       </div>
-      <div className="mt-12 flex flex-col justify-start gap-4">
-        <span className="text-[22px] font-semibold leading-[33px] text-[#333] dark:text-white">
-            TODO: Add graph with filters 
-        </span>
-        
-      </div>
-      <div className="mt-12 flex flex-col justify-between gap-8">
-        {/** Put Graph */}
-      </div>
-    </>
+    </div>
+
   );
 };
 
