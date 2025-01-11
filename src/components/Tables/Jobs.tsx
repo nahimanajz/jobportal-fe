@@ -30,11 +30,11 @@ const Jobs: FC<IProps> = ({ jobs }) => {
   };
 
   return (
-    <div className="p-6 shadow-md">
+    <div className="p-6 shadow-md overflow-x-auto">
       <h1 className="mb-4 text-2xl font-bold text-primary">Job Listings</h1>
       <table className="w-full border-collapse ">
         <thead>
-          <tr className="bg-green-100">
+          <tr className="bg-slate-200">
             <th className=" p-2">Title</th>
             <th className=" p-2">Category</th>
             <th className=" p-2">Location</th>
@@ -54,7 +54,7 @@ const Jobs: FC<IProps> = ({ jobs }) => {
                 <td className=" p-2">{job.datePosted?.substring(0, 10)}</td>
                 <td className=" p-2">
                   <button
-                    className="w-full bg-primary px-4 py-3 text-white hover:bg-white hover:text-primary"
+                    className="w-full bg-primary px-4 py-3 text-white hover:bg-slate-600  rounded-md hover:shadow"
                     onClick={() => handleApply(job)}
                   >
                     Apply

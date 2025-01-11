@@ -51,6 +51,7 @@ const SignUp: React.FC = () => {
           errors={errors}
           svg={<Icon.EnvelopeIcon />}
         />
+       
         <TextInput
           type="password"
           label="Password"

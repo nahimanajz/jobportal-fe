@@ -6,7 +6,7 @@ import { FiltersProps } from "@/types/IFilterProps";
 
 const Filters: FC<FiltersProps> = ({ handleChange, setFilters, filters, className='bg-primary' }) => {
   return (
-    <div className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4 justify-between w-full`}>
+    <div className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4 justify-between w-full dark:bg-slate-600`}>
       <div className="mb-4 flex flex-wrap gap-4 lg:flex-nowrap">
        
         <TextInputWithEvent
@@ -71,7 +71,7 @@ const Filters: FC<FiltersProps> = ({ handleChange, setFilters, filters, classNam
           }
           className="w-full rounded bg-white px-4 text-primary h-[40px] self-center "
         >
-          Sort: {filters.sortOrder}
+          Sort: {filters.sortOrder ?? "asc"}
         </button>
       </div>
     </div>

@@ -9,34 +9,35 @@ import { UserLogin, UserLoginSchema } from "@/types/custom/user";
 import * as Icon from "@/components/icons";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-const SignIn: React.FC = () => {
+const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const togglePassword = () => setShowPassword(!showPassword);
+
   const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(UserLoginSchema),
   });
 
+  const togglePassword = () => setShowPassword(!showPassword);
+
   const onSubmit: SubmitHandler<UserLogin> = async (credentials) => {
     try {
-     const res= await signIn("credentials", {...credentials, redirect:false})
-     
-     if(res?.ok){
-      router.push("/")
-     }
-      
+      const res = await signIn("credentials", {
+        ...credentials,
+        redirect: false,
+      });
+
+      if (res?.ok) {
+        router.push("/");
+      }
     } catch (error) {
-  
+      toast.error("Invalid username or password");
     }
-    
-    
   };
 
   return (

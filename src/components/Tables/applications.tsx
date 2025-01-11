@@ -48,12 +48,12 @@ const Appliations: FC<IProps> = ({ data }) => {
 
   return (
 
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark overflow-x-auto">
       <div className="p-6 shadow-md">
         <h1 className="mb-4 text-2xl font-bold text-primary">Current Job Applications</h1>
         <table className="w-full border-collapse ">
           <thead>
-            <tr className="bg-green-100">
+            <tr className="bg-slate-200">
               <th className=" p-2">Applicant</th>
               <th className=" p-2">Job title</th>
               <th className=" p-2">Location</th>

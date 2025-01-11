@@ -21,8 +21,8 @@ export const authOptions:NextAuthOptions = {
           return user.data;
           
         } catch (error) {
-  
-          return null
+         
+          return error
         }
         
       },

@@ -1,8 +1,10 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -11,8 +13,12 @@ const DropdownUser = () => {
   const router = useRouter();
   const { data, status } = useSession();
 
-  const handleLogout = async () => {
-    await signOut();
+  const handleLogout = () => {
+    try {
+      signOut();
+    } catch (error) {
+      toast.error("Please contact developer for to fix this issue for you");
+    }
   };
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -36,12 +42,6 @@ const DropdownUser = () => {
     };
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
-  });
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/auth/signin");
-    }
   });
 
   return (
@@ -122,7 +122,7 @@ const DropdownUser = () => {
               fill=""
             />
           </svg>
-          Log Out
+          Sign out
         </button>
       </div>
     </div>

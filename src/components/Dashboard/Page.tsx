@@ -1,14 +1,13 @@
 "use client";
-import React, { ChangeEvent, use, useEffect, useState } from "react";
-import { Job, JobResponse } from "@/types/custom/job";
-import { Application } from "@/types/custom/application";
+import React, { ChangeEvent, useState } from "react";
+import { Job } from "@/types/custom/job";
 import Chart from "../Charts/chart";
 import { useQuery } from "@tanstack/react-query";
 import { getApplicationOvertime } from "@/app/services/dashboard";
 import SelectGroupOne from "../FormElements/SelectGroup/SelectGroupOne";
 import { OvertimeResponse } from "@/types/IDashboardResponse";
 import Jobs from "../Tables/Jobs";
-import { getAll, getAllFiltered, getCategories } from "@/app/services/jobs";
+import { getAll, getCategories } from "@/app/services/jobs";
 
 
 const Page = () => {
@@ -43,8 +42,8 @@ const Page = () => {
   const categoryOptions = categories?.map((item) => item.category).splice(0, 10)
 
   return (
-    <div className="flex flex-col">
-      <div className="bg-white px-8 py-3 shadow">
+    <div className="flex md:flex-row flex-col w-full justify-between space-y-8 md-space-y-0">
+      <div className="bg-white px-8 py-3 shadow w-full">
         <div className="flex justify-between bg-white">
           <span className="text-[22px] font-semibold leading-[33px] text-[#071C50] dark:text-white ">
             Job applications overtime
@@ -69,7 +68,7 @@ const Page = () => {
           <Chart data={data as unknown as OvertimeResponse[]} />
         </div>
       </div>
-      <div className="py-3 flex gap-8">
+      <div className="flex gap-8 w-full justify-end">
         <div className="shadow bg-white px-6 py-5">
        
           {categories &&
@@ -83,9 +82,7 @@ const Page = () => {
           <Jobs jobs={jobs?.jobs as Job[]} />
 
         </div>
-        <div className="shadow bg-white">
-           
-        </div>
+      
 
       </div>
     </div>

@@ -10,9 +10,9 @@ const ApplicationFilters: FC<FiltersProps> = ({
 }) => {
   return (
     <div
-      className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4`}
+      className={`border-1 mb-4 flex h-auto w-full flex-wrap border-primary ${className} px-8 py-4 dark:bg-slate-600`}
     >
-      <div className="mb-4 flex flex-wrap gap-4 lg:flex-nowrap justify-betwee w-full">
+      <div className="mb-4 flex md:flex-row flex-col justify-between gap-4 w-full ">
       <TextInputWithEvent
           name="location"
           label="Job location"
@@ -61,7 +61,7 @@ const ApplicationFilters: FC<FiltersProps> = ({
           }
           className="w-full rounded bg-white px-4 text-primary h-[40px] self-center"
         >
-          Sort: {filters.sortOrder}
+          Sort: {filters.sortOrder ?? "asc"}
         </button>
       </div>
     </div>
